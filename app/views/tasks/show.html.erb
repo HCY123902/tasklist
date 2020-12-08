@@ -1,1 +1,11 @@
-<%= react_component('Task', {title: @task.title, description: @task.description, time: @task.time, location: @task.location})%>
+<%= react_component('Task', {
+    title: @task.title, 
+    description: @task.description, 
+    time: @task.time, 
+    location: @task.location,
+    task_path: task_path(@task),
+    task_type_path: task_task_types_path(@task),
+    task_id: @task_id,
+    task_types: @task.task_types.to_json,
+    authenticity_token: form_authenticity_token
+})%>

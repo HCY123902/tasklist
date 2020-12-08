@@ -15,7 +15,6 @@ class TaskForm extends React.Component {
     
       return (
         <React.Fragment>
-          Path: {this.props.task_path}
           <form id="task_form" action={this.props.task_path} role="form" method="post">
               
               <input type="hidden" name="_method" value={method} />
@@ -39,7 +38,7 @@ class TaskForm extends React.Component {
                   <textarea name="location" form="task_form" placeholder="Enter the location">{this.props.location}</textarea>
               </div>
               <div class="text-center">
-                  <button type="submit" class="btn btn-primary mt-5 custombutton">Create</button>
+                  <button type="submit" class="btn btn-primary mt-5 custombutton">Create or edit</button>
               </div>
           </form>
           <button><a href='/tasks'>Go back</a></button>
