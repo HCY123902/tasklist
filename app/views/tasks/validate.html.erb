@@ -1,3 +1,9 @@
+<%=
+    react_component('Validation', {
+        errors: @task.errors.full_messages,
+        error_count: @task.errors.count
+    })
+%>
 <%= react_component('TaskForm', {
     title: @task.title, 
     description: @task.description, 

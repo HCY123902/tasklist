@@ -7,17 +7,17 @@ class TaskItem extends React.Component {
     const editUrl = "/tasks/" + this.props.id + "/edit";
     return (
       <React.Fragment>
-        <tr key={taskList[0].id}>
+        <tr key={this.props.id}>
         <td>
           
-            <a href={showUrl}>{taskList[0].title}</a>
+            <a href={showUrl}>{this.props.title}</a>
           
         </td>
         <td>
             <a href={editUrl}>Edit</a>
         </td>
         <td>
-            <a href={showUrl}>Delete</a>
+            <a href={showUrl} data-method="delete" data-confirm="Are you sure about this?">Delete</a>
         </td>
         </tr>
       </React.Fragment>
