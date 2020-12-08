@@ -5,6 +5,9 @@ class HelloWorld extends React.Component {
     return (
       <React.Fragment>
         Greeting: {this.props.greeting}
+        <div>
+          <button><a href='/tasks'>Enter the task list</a></button>
+        </div>
       </React.Fragment>
     );
   }

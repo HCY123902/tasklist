@@ -1,1 +1,4 @@
-<%= react_component('TaskList', {tasks: @tasks.to_json})%>
+<%= react_component('TaskList', {
+    tasks: @tasks.to_json,
+    category: @category
+})%>

@@ -7,6 +7,7 @@ class TaskList extends React.Component {
   render () {
     console.log('-------------------------------------------------' + this.props.tasks);
     const taskList = JSON.parse(this.props.tasks);
+    //const taskList = this.props.tasks;
     /*
     const array = new Array();
     for (let i = 0; i < taskList.length; i = i + 1) {
@@ -57,6 +58,19 @@ class TaskList extends React.Component {
         <div className="new-task-button">
           <button><a href='/tasks/new'>Add a new task</a></button>
         </div>
+        <form id="task_search_form" action='/tasks' role="form" method="get">
+          <label for="search_category">Task type</label>
+          <select name="search_category" id="search_category">
+            <option value="All">All</option>
+            <option value="School">School</option>
+            <option value="Work">Work</option>
+            <option value="CCA">CCA</option>
+          </select>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-5 custombutton">Search</button>
+          </div>
+        </form>
+
         <table border = "1" cellspacing="10" cellpadding="5" frame = "hsides" align = "center">
           <tr>
             <th>Current tasks</th>
