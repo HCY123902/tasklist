@@ -66,6 +66,8 @@ class TaskList extends React.Component {
             <option value="Work">Work</option>
             <option value="CCA">CCA</option>
           </select>
+          <label for="search_title">Task title</label>
+          <input class="form-control" name="search_title" placeholder="Enter the title" />
           <div class="text-center">
             <button type="submit" class="btn btn-primary mt-5 custombutton">Search</button>
           </div>

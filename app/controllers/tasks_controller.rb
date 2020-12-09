@@ -3,7 +3,21 @@ class TasksController < ApplicationController
         allTasks = Task.all
         taskList = Array.new;
         @category = params[:search_category]
-        if @category == 'School' or @category == 'Work' or @category == 'CCA' 
+        @title = params[:search_title]
+        if @title and @title != '' and (@category == 'School' or @category == 'Work' or @category == 'CCA') 
+            allTasks.each do |task|
+                if task.title.include?(@title)
+                    taskTypes = task.task_types
+                    taskTypes.each do |taskType|
+                        if taskType.category == @category
+                            taskList.push(task)
+                            break
+                        end
+                    end
+                end
+            end
+            @tasks = taskList
+        elsif @category == 'School' or @category == 'Work' or @category == 'CCA'
             allTasks.each do |task|
                 taskTypes = task.task_types
                 taskTypes.each do |taskType|
@@ -11,10 +25,17 @@ class TasksController < ApplicationController
                         taskList.push(task)
                         break
                     end
-                end
+                end            
             end
             @tasks = taskList
-        else 
+        elsif @title and @title != ''
+            allTasks.each do |task|
+                if task.title.include?(@title)
+                    taskList.push(task)
+                end   
+            end
+            @tasks = taskList
+        else
             @tasks = allTasks
         end
     end
