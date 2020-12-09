@@ -1,5 +1,15 @@
 import React from "react"
 import PropTypes from "prop-types"
+import './TaskList.css';
+import { Button } from "@material-ui/core" 
+
+import { makeStyles } from '@material-ui/core/styles';
+
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import Paper from '@material-ui/core/Paper';
+
 class Task extends React.Component {
   render () {
     const editPath = this.props.task_path + "/edit";
@@ -8,68 +18,97 @@ class Task extends React.Component {
 
     const categoryList = taskTypeList.map((taskType, count) => {
       const deleteUrl = addTypePath + "/" + taskTypeList[count].id;
-
+      
       return (
         <li key={count}>
+          <Button class={taskType.category}>
           {taskType.category}
-          <a href={deleteUrl} data-method="delete" data-confirm="Are you sure about this?">Delete</a>
+          </Button>
+          &nbsp;&nbsp;&nbsp;
+          <Button class="category-button">
+            <a href={deleteUrl} data-method="delete" data-confirm="Are you sure about this?">Delete</a>
+          </Button>
         </li>
       );
     })
 
     return (
       <React.Fragment>
-        <p>
-          <strong>Title:</strong>
-          <br/>
-          {this.props.title}
-        </p>
-  
-        <p>
-          <strong>Description:</strong>
-          <br/>
-          {this.props.description}
-        </p>
+        <div class="flex-container">
 
-        <p>
-          <strong>Time:</strong>
-          <br/>
-          {this.props.time}
-        </p>
-  
-        <p>
-          <strong>Location:</strong>
-          <br/>
-          {this.props.location}
-        </p>
+          <div class="left-panel">
+            <h2>Existing categories</h2>
+            <ul>
+              {categoryList}
+            </ul>
+            <hr/>
 
-        <h2>Existing categories</h2>
-        <ul>
-          {categoryList}
-        </ul>
+            <h2>Add a category</h2>
+            <form id="task_type_form" action={addTypePath} role="form" method="post">
+            <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />
+            <input type="hidden" name="task_id" value={this.props.task_id} />
+              <div class="form-group">
+                  <label for="category">Task type</label>
+                  <br/>
+                  <select name="category" id="category">
+                            <option value="School">School</option>
+                            <option value="Work">Work</option>
+                            <option value="CCA">CCA</option>
+                  </select>
+              </div>
+              <br/>
+              <div class="text-center">
+                <Button type="submit" color="primary" variant="outlined">Add</Button>
+              </div>
+              
+            </form>
+            <br/>
+
+            <Button color="primary" variant="outlined"><a href={editPath}>Edit</a></Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button color="secondary" variant="outlined"><a href='/tasks'>Go back</a></Button>
+          </div>
+
+          <div class="right-panel">
+            <p>
+              <strong>Title:</strong>
+              <br/>
+              <Paper>
+                {this.props.title}
+              </Paper>
+              
+            </p>
+      
+            <p>
+              <strong>Description:</strong>
+              <br/>
+              <Paper>
+              {this.props.description}
+              </Paper>
+              
+            </p>
+
+            <p>
+              <strong>Time:</strong>
+              <br/>
+              <Paper>
+              {this.props.time}
+              </Paper>
+              
+            </p>
+      
+            <p>
+              <strong>Location:</strong>
+              <br/>
+              <Paper>
+              {this.props.location}
+              </Paper>
+              
+            </p>
+          </div>
+
+        </div>
         
-
-        <h2>Add a comment:</h2>
-        <form id="task_type_form" action={addTypePath} role="form" method="post">
-        <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />
-        <input type="hidden" name="task_id" value={this.props.task_id} />
-          <div class="form-group">
-              <label for="category">Task type</label>
-              <select name="category" id="category">
-                        <option value="School">School</option>
-                        <option value="Work">Work</option>
-                        <option value="CCA">CCA</option>
-              </select>
-          </div>
-          <div class="text-center">
-                  <button type="submit" class="btn btn-primary mt-5 custombutton">Add</button>
-          </div>
-          
-        </form>
-
-
-        <button><a href={editPath}>Edit</a></button>
-        <button><a href='/tasks'>Go back</a></button>
       </React.Fragment>
     );
   }

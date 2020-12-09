@@ -1,5 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
+import Paper from '@material-ui/core/Paper'
+
 class Validation extends React.Component {
   render () {
     //const errorList = JSON.parse(this.props.errors);
@@ -8,7 +10,9 @@ class Validation extends React.Component {
       const messages = this.props.errors.map((message, count) => {
         return (
           <li key={count}>
-            {message}
+            <Paper>
+              {message}
+            </Paper>
           </li>
         );
       })

@@ -2,8 +2,31 @@ import React from "react"
 import PropTypes from "prop-types"
 import TaskItem from "./TaskItem";
 import './TaskList.css';
+import { Button } from "@material-ui/core" 
+
+import { makeStyles } from '@material-ui/core/styles';
+
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+}));
+
 
 class TaskList extends React.Component {
+  /*
+  <table border = "1" cellspacing="10" cellpadding="5" frame = "hsides" align = "center">
+              <tr>
+                <th>Current tasks</th>
+                <th colspan = "2">Action</th>
+              </tr>
+              {mapping}
+            </table>
+  */
+
   render () {
     console.log('-------------------------------------------------' + this.props.tasks);
     const taskList = JSON.parse(this.props.tasks);
@@ -38,11 +61,13 @@ class TaskList extends React.Component {
         );
     })
 
+    //const classes = useStyles();
+
     if (mapping.length === 0) {
       return (
         <React.Fragment>
         <div className="new-task-button">
-          <button><a href='/tasks/new'>Add a new task</a></button>
+          <Button color="primary" variant="outlined"><a href='/tasks/new'>Add a new task</a></Button>
         </div>
         <div>
           <h2>
@@ -55,32 +80,47 @@ class TaskList extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="new-task-button">
-          <button><a href='/tasks/new'>Add a new task</a></button>
-        </div>
-        <form id="task_search_form" action='/tasks' role="form" method="get">
-          <label for="search_category">Task type</label>
-          <select name="search_category" id="search_category">
-            <option value="All">All</option>
-            <option value="School">School</option>
-            <option value="Work">Work</option>
-            <option value="CCA">CCA</option>
-          </select>
-          <label for="search_title">Task title</label>
-          <input class="form-control" name="search_title" placeholder="Enter the title" />
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary mt-5 custombutton">Search</button>
+        <div class="flex-container">
+          <div class="left-panel">
+            <form id="task_search_form" action='/tasks' role="form" method="get">
+              <label for="search_category">Task type</label>
+              <br/>
+              <select name="search_category" id="search_category">
+                <option value="All">All</option>
+                <option value="School">School</option>
+                <option value="Work">Work</option>
+                <option value="CCA">CCA</option>
+              </select>
+              <br/>
+              <br/>
+              <label for="search_title">Task title</label>
+              <br/>
+              <TextField id="search_title" label="Enter the title" type="search" name="search_title"/>
+              <br/>
+              <br/>
+              <div class="text-center">
+                <Button type="submit" color="primary" variant="outlined">Search</Button>
+              </div>
+            </form>
           </div>
-        </form>
 
-        <table border = "1" cellspacing="10" cellpadding="5" frame = "hsides" align = "center">
-          <tr>
-            <th>Current tasks</th>
-            <th colspan = "2">Action</th>
-          </tr>
-          {mapping}
-        </table>
-        <button><a href='/welcome/index'>Go back</a></button>
+          <div class="right-panel">
+            <div className="new-task-button">
+              <Button color="primary" variant="outlined"><a href='/tasks/new'>Add a new task</a></Button>
+            </div>
+            <div>
+              <Grid container spacing={1}>
+                <Grid item xs={8}>Current tasks</Grid>
+                <Grid item xs={4}>Action</Grid>
+                {mapping}
+              </Grid>
+            </div>
+            
+
+            
+            <Button color="secondary" variant="outlined"><a href='/welcome/index'>Go back</a></Button>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
