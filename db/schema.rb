@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2020_12_08_072521) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "task_types", force: :cascade do |t|
     t.string "category"
-    t.integer "task_id", null: false
+    t.bigint "task_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["task_id"], name: "index_task_types_on_task_id"
